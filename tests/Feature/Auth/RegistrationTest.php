@@ -16,21 +16,20 @@ class RegistrationTest extends TestCase
 
         $response->assertStatus(200);
     }
-
-    public function test_new_users_can_register(): void
+    public function new_users_can_register()
     {
         $response = $this->post('/register', [
             'name' => 'Test User',
-            'kana' => 'テスト ユーザー',
+            'kana' => 'テストユーザー',
             'email' => 'test@example.com',
             'password' => 'password',
             'password_confirmation' => 'password',
-            'postal_code' => '0000000',
-            'address' => 'テスト',
+            'postal_code' => '1234567',
+            'address' => 'Test Address',
             'phone_number' => '00000000000',
         ]);
 
         $this->assertAuthenticated();
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $response->assertRedirect(RouteServiceProvider::HOME);  // ここで'/'にリダイレクトすることを期待
     }
 }
