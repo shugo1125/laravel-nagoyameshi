@@ -12,14 +12,7 @@ class UserTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** 
-     * A basic feature test example. 
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200);
-    }
+
 
     /**
      * 未ログインのユーザーは管理者側の会員一覧ページにアクセスできない
@@ -41,14 +34,27 @@ class UserTest extends TestCase
         // 管理者ページにアクセス
         $response = $this->get('/admin/users');
 
+<<<<<<< HEAD
         // アクセス禁止 403 を確認
         $response->assertRedirect('/admin/login');
+=======
+        $response->assertRedirect('/admin/login'); // アクセス禁止
+
+>>>>>>> feature-admin-users
     }
     /**
      * ログイン済みの管理者は管理者側の会員一覧ページにアクセスできる
      */
     public function test_logged_in_admin_can_access_member_list_page(): void
     {
+<<<<<<< HEAD
+=======
+        // 管理者ユーザーを作成しログイン
+        $admin = Admin::factory()->create(); // Admin モデルを使用
+
+        $this->actingAs($admin, 'admin');
+
+>>>>>>> feature-admin-users
 
         $admin = new Admin(); // Admin モデルを使用
         $admin->email = 'admin@example.com';
@@ -80,11 +86,17 @@ class UserTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
+<<<<<<< HEAD
         // 会員詳細ページにアクセス
         $response = $this->get('/admin/users/{$user->id}');
 
         // アクセス禁止 403 を確認
         $response->assertRedirect('/admin/login');;
+=======
+        $response = $this->get('/admin/users/1');
+
+        $response->assertRedirect('/admin/login'); // アクセス禁止
+>>>>>>> feature-admin-users
     }
 
     /**
@@ -92,11 +104,18 @@ class UserTest extends TestCase
      */
     public function test_logged_in_admin_can_access_member_detail_page(): void
     {
+<<<<<<< HEAD
         $admin = new Admin(); // Admin モデルを使用
         $admin->email = 'admin@example.com';
         $admin->password = Hash::make('nagoyameshi');
         $admin->save();
 
+=======
+        // 管理者ユーザーを作成しログイン
+        $admin = Admin::factory()->create(); // Admin モデルを使用
+
+        $this->actingAs($admin, 'admin');
+>>>>>>> feature-admin-users
 
         // ダミーユーザーを作成
         $user = User::factory()->create();
