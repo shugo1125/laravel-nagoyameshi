@@ -12,6 +12,7 @@ class UserTest extends TestCase
     use RefreshDatabase;
 
 
+
     /**
      * 未ログインのユーザーは管理者側の会員一覧ページにアクセスできない
      */
@@ -31,9 +32,10 @@ class UserTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->get('/admin/users');
-        $response->assertRedirect('/admin/login'); // アクセス禁止
-    }
 
+        $response->assertRedirect('/admin/login'); // アクセス禁止
+
+    }
     /**
      * ログイン済みの管理者は管理者側の会員一覧ページにアクセスできる
      */
@@ -41,7 +43,9 @@ class UserTest extends TestCase
     {
         // 管理者ユーザーを作成しログイン
         $admin = Admin::factory()->create(); // Admin モデルを使用
+
         $this->actingAs($admin, 'admin');
+
 
         $response = $this->get('/admin/users');
         $response->assertStatus(200); // 正常にアクセスできる
@@ -66,6 +70,7 @@ class UserTest extends TestCase
         $this->actingAs($user);
 
         $response = $this->get('/admin/users/1');
+
         $response->assertRedirect('/admin/login'); // アクセス禁止
     }
 
@@ -76,6 +81,7 @@ class UserTest extends TestCase
     {
         // 管理者ユーザーを作成しログイン
         $admin = Admin::factory()->create(); // Admin モデルを使用
+
         $this->actingAs($admin, 'admin');
 
         // ダミーユーザーを作成
